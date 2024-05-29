@@ -7,6 +7,48 @@
   <link rel="stylesheet" a="" href="style.css">
   <link id="theme-style" rel="stylesheet" href="light-theme.css">
 <style>
+.popup {
+         
+         position: fixed;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         background-color: rgba(103, 103, 103, 0.534);
+         padding: 20px;
+         border: 2px solid #333;
+         backdrop-filter: blur(5.1px);
+    -webkit-backdrop-filter: blur(5.1px);
+    box-shadow: 0px 10px 5px  rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+         z-index: 1000;
+         text-align: center;
+     }
+     .popup p {
+         font-size: 20px; /* Larger text size */
+         margin-bottom: 20px;
+     }
+     .popup button {
+      border: white;
+         padding: 10px 20px;
+         font-size: 16px;
+         cursor: pointer;
+         transition: .3s;
+         border-radius: 15px;
+     }
+     .popup button:hover {
+
+         background-color: grey;
+     }
+     .popup-overlay {
+         display: none;
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.5);
+         z-index: 999;
+     }
 
 
 
@@ -14,6 +56,39 @@
 </head>
 
 <body>
+
+   
+
+  <div class="popup-overlay" id="popupOverlay"></div>
+
+  <div class="popup" id="popup">
+      <p id="popupMessage"> <b>NOTICE: </b> Moonly servers and authentication services will be shut down this summer starting Friday, May 31st (5/31/2024) This means that the website your on will be shut down to preserve the server state. We will be starting it up again once summer ends but until then, MOONLY will be shut down. Please make your backups and save your games.</p>
+      <button onclick="dismissPopup()">Acknowledge and continue</button>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if the popupDismissed flag is set in localStorage
+        if (localStorage.getItem('popupDismissed') == 'true') {
+            dismissPopup();
+        }
+    });
+
+    function showPopup() {
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById('popupOverlay').style.display = 'block';
+    }
+
+    function dismissPopup() {
+        document.getElementById('popup').style.display = 'none';
+        document.getElementById('popupOverlay').style.display = 'none';
+        // Set the popupDismissed flag in localStorage
+        localStorage.setItem('popupDismissed', 'true');
+    }
+
+    // Attach the dismissPopup function to the button's click event
+    document.getElementById('dismissButton').addEventListener('click', dismissPopup);
+</script>
  
 
 
